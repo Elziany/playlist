@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 class Playlist extends Model
 {
@@ -11,12 +12,14 @@ class Playlist extends Model
 protected $table="playlists";
 protected $fillable=[
     'name',
-    'singerName',
-    'album_id',
-    'logoURL',
-    'soundURL',
-    'viewerNumber'
+    'imgURL',
+
 ];
+
+function songs():BelongsToMany
+{
+    return $this->belongsToMany(Song::class,'song_playlist');
+}
 
 
 }

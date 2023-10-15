@@ -4,30 +4,33 @@ namespace App\Http\Controllers\Playlist;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Models\Playlist;
+use App\Services\PlaylistService;
+use App\Http\Requests\PlaylistRequest;
 
 class PlaylistController extends Controller
 {
-     /* get all play lists*/
-     function getAllPlaylists(){
-        $playlists=Playlist::get()->all();
-        $reposnse=[
-            'success'=>true,
-            'data'=>$playlists,
-            'status'=>200
-        ];
-        return response()->json($reposnse);
+    public $playlistService;
+    function __construct(PlaylistService  $playlistService){
+        $this->playlistService=$playlistService;
     }
+function addPlaylistPage(){
+    $categories=$this->playlistService->getAllCategories();
+    return view('playlist.createPlaylist',compact('categories'));
+}
 
-    /*get top 100  viewed playlists  */
-    function getTopTen(){
-        $playlists=Playlist::take(100)->orderBy('viewerNumber','desc')->get();
-        $reposnse=[
-            'success'=>true,
-            'data'=>$playlists,
-            'status'=>200
-        ];
-        return response()->json($reposnse);
+##########################################################################################3
 
-    }
+function addPlaylist(PlaylistRequest $req){
+$playlist=$this->playlistService->addNewPlaylist($req);
+   return back();
+
+}
+##########################################3
+function testAPI($id){
+   $playlist=Song::where('id',$id)->first();
+
+dd($playlist->playlists);
+
+
+}
 }

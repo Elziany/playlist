@@ -1,7 +1,7 @@
 <?php
 function uploadFileToFireBase($file,$type)
 {
-   
+
     $expiredAt=strtotime('20240901');
     $newFile=$file->getClientOriginalName();
     $localfolder=public_path('firebase_temp')."/".$type."/";

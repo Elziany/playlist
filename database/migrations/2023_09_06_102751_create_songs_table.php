@@ -11,13 +11,14 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('playlists', function (Blueprint $table) {
+        Schema::create('songs', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name');
             $table->string('singerName')->nullable();
-            $table->integer('album_id')->nullable();
-            $table->string('logoURL');
-            $table->string('soundURL');
+            $table->integer('category_id');
+            $table->integer('album_id')->default(0)->change();
+            $table->string('imgURL');
+            $table->string('audioURL');
             $table->integer('viewerNumber');
             $table->timestamps();
         });

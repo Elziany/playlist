@@ -1,7 +1,9 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\dataSet\datasetcontroller;
+use App\Http\Controllers\Song\SongController;
+use App\Http\Controllers\playlist\PlaylistController;
+use App\Http\Controllers\Category\CategoryController;
 
 /*
 |--------------------------------------------------------------------------
@@ -17,7 +19,20 @@ use App\Http\Controllers\dataSet\datasetcontroller;
 Route::get('/', function () {
     return view('welcome');
 });
+####################song#######################
 
-Route::get('/addSong',[datasetcontroller::class,'addSongPage']);
-Route::post('/addNewSong',[datasetcontroller::class,'addNewSong'])->name('addNewSong');
+Route::get('/addSongPage',[SongController::class,'addSongPage']);
+Route::post('/addSong',[SongController::class,'addNewSong'])->name('addSong');
+
+########################Playlist#########################
+
+Route::get('/addPlaylistPage',[PlaylistController::class,'addPlaylistPage']);
+Route::post('/addPlaylist',[PlaylistController::class,'addPlaylist'])->name('addPlaylist');
+Route::get('/testAPI/{id}',[PlaylistController::class,'testAPI'])->name('testAPI');
+
+
+
+########Category Routes######################
+Route::get('/addCategoryPage',[CategoryController::class,'createNewCategoryPage']);
+Route::post('/addCategory',[CategoryController::class,'createNewCategory'])->name('addCategory');
 
